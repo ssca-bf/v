@@ -1,68 +1,68 @@
-name: androidBuild
+姓名:androidBuild
 
-# Controls when the action will run.
-on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+#控制操作何时运行。
+在……之上:
+  #触发推式或拉式请求事件的工作流，但仅限于主体分支
+推:
+分支机构:[主要的]
+pull_request:
+分支机构:[主要的]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  #允许您从“操作”选项卡手动运行此工作流
+workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  buildAndroid:
-    name: buildAndroid
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@main
+#工作流运行由一个或多个作业组成，这些作业可以按顺序或并行运行
+工作:
+  #此工作流包含一个名为“生成”的作业
+buildAndroid:
+姓名:buildAndroid
+run-on:ubuntu-最新
+步骤:
+-姓名:结帐
+uses:操作/结帐@main
 
-      - name: Setup Android NDK
-        uses: nttld/setup-ndk@main
-        id: setup-ndk
-        with:
-          ndk-version: r21e
+-姓名:安装Android NDK
+uses:nttld/setup-ndk@main
+身份标识:setup-ndk
+和……一起:
+ndk-版本:r21e
 
-      - name: Setup Java JDK
-        uses: actions/setup-java@main
-        with:
-          distribution: 'zulu'
-          java-version: '11'
+-姓名:安装Java JDK
+uses:操作/设置-java@main
+和……一起:
+分布:'祖鲁'
+java版:'17'
 
-      - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
-        with:
-          haxe-version: 4.2.5
+-姓名:设置Haxe
+uses:krdlab/setup-haxe@master
+和……一起:
+haxe-版本:4.3.6
 
-      - name: Restore Previous Cache
-        id: cache-debug-build-android-restore
-        uses: actions/cache/restore@main
-        with:
-          path: |
-            ~/haxelib
-            ~/.gradle
-            export/release/android/haxe
-            export/release/android/obj
-          key: cache-android-build
+-姓名:还原以前的缓存
+身份标识:cache-debug-build-android-restore
+uses:操作/缓存/恢复@main
+和……一起:
+路径:|
+~/Haxelib
+~/.gradle
+导出/发布/android/haxe
+导出/发布/android/obj
+钥匙:cache-android-build
 
-      - name: Install Haxelib
-        run: |
-          haxelib setup ~/haxelib
-          haxelib install hxcpp 4.2.1 > /dev/null
-          haxelib install lime 7.9.0
-          haxelib install openfl
-          haxelib --never install flixel 5.2.2
-          haxelib run lime setup flixel
-          haxelib install flixel-tools 1.5.1
-          haxelib install flixel-ui
-          haxelib install flixel-addons 3.0.2
-          haxelib install tjson
-          haxelib install hxjsonast
-          haxelib install SScript
+-姓名:安装Haxelib
+跑:|
+Haxelib设置~/Haxelib
+Haxelib安装hxcpp4.2.1>/dev/null
+Haxelib安装石灰7.9.0
+Haxelib安装openfl
+Haxelib--不得安装flixel5.2.2
+Haxelib运行时间设置flixel
+Haxelib安装flixel-tools1.5.1
+Haxelib安装flixel-ui
+Haxelib安装flixel-addons3.0.2
+Haxelib安装TJSON
+Haxelib安装hxjsonast
+Haxelib安装SScript
           haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
